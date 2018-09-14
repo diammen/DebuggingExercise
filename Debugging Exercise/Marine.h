@@ -4,8 +4,8 @@
 class Marine : public Entity
 {
 public:
-	Marine();
-	~Marine();
-
+	void setStats(int unitAtk, int unitHP);
+	void takeDamage(int damage);
+	bool isAlive();
 };
 

@@ -1,19 +1,10 @@
+#include <iostream>
 #include "Zergling.h"
 
-
-
-Zergling::Zergling()
+void Zergling::setStats(int unitAtk, int unitHP)
 {
-}
-
-
-Zergling::~Zergling()
-{
-}
-
-int Entity::attack()
-{
-	return 10;
+	attack = unitAtk;
+	health = unitHP;
 }
 
 void Zergling::takeDamage(int damage)
@@ -23,9 +14,11 @@ void Zergling::takeDamage(int damage)
 		health = 0;
 }
 
-// Is there a zergling Alive
-bool zerglingAlive(Zergling * swarmArr, size_t arrSize)
+bool Zergling::isAlive()
 {
-	return false;
+	if (health <= 0)
+	{
+		return false;
+	}
+	return true;
 }
-

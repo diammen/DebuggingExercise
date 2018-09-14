@@ -1,17 +1,18 @@
+#include <iostream>
 #include "Entity.h"
 
-
-
-Entity::Entity()
+void Entity::setStats(int unitAtk, int unitHP)
 {
-}
-
-
-Entity::~Entity()
-{
+	attack = unitAtk;
+	health = unitHP;
 }
 
 bool Entity::isAlive()
 {
-	return health = 0;
+	return false;
+}
+
+void Entity::takeDamage(int damage)
+{
+	health -= damage;
 }

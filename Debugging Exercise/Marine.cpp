@@ -1,29 +1,22 @@
+#include <iostream>
 #include "Marine.h"
 
-
-
-Marine::Marine()
+void Marine::setStats(int unitAtk, int unitHP)
 {
-	health = 50;
+	attack = unitAtk;
+	health = unitHP;
 }
 
-
-Marine::~Marine()
-{
-}
-
-int Entity::attack()
-{
-	return 10;
-}
-
-void Entity::takeDamage(int damage)
+void Marine::takeDamage(int damage)
 {
 	health -= damage;
 }
 
-// Is there a Marine Alive?
-bool marineAlive(Marine * squadArr, size_t arrSize)
+bool Marine::isAlive()
 {
-	return false;
+	if (health <= 0)
+	{
+		return false;
+	}
+	return true;
 }

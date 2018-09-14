@@ -2,15 +2,14 @@
 class Entity
 {
 public:
-	Entity();
-	~Entity();
 
-	virtual int attack();
-	virtual void takeDamage(int damage);
-	bool isAlive();
-
-protected:
+	int attack;
 	int health;
-	int maxHealth;
+
+	virtual void setStats(int attack, int health);
+	virtual void takeDamage(int damage);
+	virtual bool isAlive();
+
+
 };
 
