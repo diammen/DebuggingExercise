@@ -17,11 +17,17 @@
 // 10/09/2018
 
 #include <iostream>
+#include <cstdlib>
+#include <chrono>
+#include <thread>
 #include "Marine.h"
 #include "Zergling.h"
 
 using std::cout;
 using std::endl;
+
+using namespace std::chrono_literals;
+using namespace std::this_thread;
 
 // Is there a zergling Alive
 bool zerglingAlive(Zergling * swarmArr, size_t arrSize)
@@ -65,13 +71,16 @@ int main()
 	Zergling swarm[10];
 
 	int squadSize = 10;
-	int swarmSize = 10;
+	int squadCount = squadSize;
+	int squadTarget = 0;
+
+	int swarmSize = 15;
 
 	int unitAtk = 10;
 	int unitHP = 10;
 	int swarmAtk = 1;
 	int swarmHP = 1;
-	int squadCount = squadSize;
+
 
 	// Set stats for each faction
 	for (int i = 0; i < squadSize; ++i)
@@ -95,19 +104,23 @@ int main()
 				// each marine will attack the first zergling in the swarm
 				cout << "A marine fires for " << squad[i].attack << " damage. " << endl;
 				int damage = squad[i].attack;
-				swarm[i].takeDamage(damage);
+				swarm[squadTarget].takeDamage(damage);
+				sleep_for(0.5s);
 				if (!swarm[i].isAlive()) // if the zergling dies, it is marked as such
 				{
 					cout << "The zergling target dies" << endl;
+					squadTarget++;
 				}
 			}
 		}
+		sleep_for(1.5s);
 		if (zerglingAlive(swarm, swarmSize)) // if there's at least one zergling alive
 		{
 			for (size_t i = 0; i < squadSize; i++) // loop through zerglings
 			{
 				cout << "A zergling attacks for " << swarm[i].attack << " damage." << endl;
 				squad[i].takeDamage(swarm[i].attack);
+				sleep_for(0.5s);
 				if (!squad[i].isAlive())
 				{
 					squadCount--;
@@ -117,7 +130,7 @@ int main()
 			}
 		}
 	}
-
+	sleep_for(1s);
 	// Once one team is completely eliminated, the fight ends and one team wins
 	cout << "The fight is over. ";
 	if (marineAlive(squad, squadSize))
@@ -128,6 +141,6 @@ int main()
 	{
 		cout << "The Zerg win." << endl;
 	}
-
+	sleep_for(1.5s);
 	return 0;
 }
